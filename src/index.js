@@ -51,8 +51,9 @@ function renderCountryList(item) {
       </li>`;
     })
     .join('');
-  refs.countryList.innerHTML = markupList;
-} 
+    //refs.countryList.innerHTML = markupList;
+    refs.countryList.insertAdjacentHTML('beforeend', markupList)
+};
 
 function renderCountryInfo(items){
     const markupInfo = items
@@ -60,19 +61,21 @@ function renderCountryInfo(items){
             return ` <div>
         <h1>${name.official}</h1>
         <img src="${flags.svg}" alt="${name.official}" width="40" > 
-      <p> ${capital}</p>
+      <p>  ${capital}</p>
       <p> ${population}</p>
       <p> ${Object.values(languages)} </p>
       </div>`;
-    }).join('');
-      refs.countryInfo.innerHTML = markupInfo;
-    }
+        })
+        .join('');
+    //refs.countryInfo.innerHTML = markupInfo;
+    refs.countryInfo.insertAdjacentHTML('beforeend', markupInfo)
+};
    
 
 //очищуємо пошук
 function clearCountries() {
-    // refs.countryList.innerHTML='';
-    // refs.countryInfo.innerHTML='';
-    refs.innerHTML = '';
+    refs.countryList.innerHTML='';
+    refs.countryInfo.innerHTML='';
+    // refs.innerHTML = '';
     
 }
