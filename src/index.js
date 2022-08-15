@@ -25,12 +25,12 @@ function onSearch(event) {
     }
     fetchCountries(countrySearchQuery)//отримання країн - через фу-цію фетч -на іншій вкладці. Тут вже умови прописуємо
         .then(data => {
-            if (data.length > 11) {
+            if (data.length > 10) {
                 Notiflix.Notify.info('Too many matches found. Please enter a more specific name.')
                 return
             } else if (data.length === 1) {
                 renderCountryInfo(data);
-            } else if (data.length >1 && data.length < 11) {
+            } else {
                 renderCountryList(data);
             }
         })
@@ -41,9 +41,9 @@ function onSearch(event) {
 }
 
 //рендеринг країн
-//1 або кілька
+
 function renderCountryList(item) {
-    const markup = item
+    const markupList = item
      .map(({ name, flags }) => {
          return `<li>
       <img src="${flags.svg}" alt="${name.official}" width="40">
@@ -51,11 +51,11 @@ function renderCountryList(item) {
       </li>`;
     })
     .join('');
-  refs.countryList.innerHTML = markup;
+  refs.countryList.innerHTML = markupList;
 } 
-   //більше 10
+
 function renderCountryInfo(items){
-    const collection = items
+    const markupInfo = items
         .map(({ name, capital, population, flags, languages }) => {
             return ` <div>
         <h1>${name.official}</h1>
@@ -65,12 +65,14 @@ function renderCountryInfo(items){
       <p> ${Object.values(languages)} </p>
       </div>`;
     }).join('');
-      refs.countryInfo.innerHTML = collection;
+      refs.countryInfo.innerHTML = markupInfo;
     }
    
 
 //очищуємо пошук
 function clearCountries() {
-    //refs.countryList.innerHTML - '';
-  refs.countryInfo.innerHTML = '';
+    // refs.countryList.innerHTML='';
+    // refs.countryInfo.innerHTML='';
+    refs.innerHTML = '';
+    
 }
