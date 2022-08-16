@@ -8,7 +8,7 @@ const DEBOUNCE_DELAY = 300;
 const refs = {
     inputField: document.querySelector('#search-box'),
     countryList: document.querySelector('.country-list'),
-    countryInfo: document.querySelector('country-info'),
+    countryInfo: document.querySelector('.country-info'),
 };
 //console.log(refs)
 
@@ -46,29 +46,29 @@ function renderCountryList(item) {
     const markupList = item
      .map(({ name, flags }) => {
          return `<li>
-      <img src="${flags.svg}" alt="${name.official}" width="40">
+      <img class="image" src="${flags.svg}" alt="${name.official}" width="40">
       <p>${name.official}</p>
       </li>`;
     })
     .join('');
-    //refs.countryList.innerHTML = markupList;
-    refs.countryList.insertAdjacentHTML('beforeend', markupList)
+    refs.countryList.innerHTML = markupList;
+    // refs.countryList.insertAdjacentHTML('beforeend', markupList)
 };
 
-function renderCountryInfo(items){
-    const markupInfo = items
+function renderCountryInfo(item){
+    const markupInfo = item
         .map(({ name, capital, population, flags, languages }) => {
             return ` <div>
         <h1>${name.official}</h1>
-        <img src="${flags.svg}" alt="${name.official}" width="40" > 
-      <p>  ${capital}</p>
-      <p> ${population}</p>
-      <p> ${Object.values(languages)} </p>
+        <img class="image" src="${flags.svg}" alt="${name.official}" width="100" > 
+      <p> <span>Capital:</span>  ${capital}</p>
+      <p> <span>Population:</span> ${population}</p>
+      <p> <span>Language:</span> ${Object.values(languages)} </p>
       </div>`;
         })
         .join('');
-    //refs.countryInfo.innerHTML = markupInfo;
-    refs.countryInfo.insertAdjacentHTML('beforeend', markupInfo)
+    refs.countryInfo.innerHTML = markupInfo;
+    // refs.countryInfo.insertAdjacentHTML('beforeend', markupInfo)
 };
    
 
